@@ -1,21 +1,18 @@
 """## Regression with Deep Neural Network
 
 ### Preprocess Data
-
-Load and prepare Hadamard gate data. Make sure the file "hadamard_data.csv" is kept in the same folder as this Jupyter Notebook.
 """
 
-df = pd.read_csv('hadamard_data.csv')
+folder = './data' 
+filename = 'hadamard_data.csv'
+file_path = os.path.join(folder, filename)
+df = pd.read_csv(file_path)
 Amplitude = df.iloc[:100000, 0]
 Fidelity = df.iloc[:100000, 1]
 hadamard_dataset = pd.DataFrame({'Amplitude': Amplitude, 'Fidelity': Fidelity})
 hadamard_dataset.head()
 
-from google.colab import drive
-drive.mount('/content/drive')
-
 hadamard_dataset.isna().sum()
-
 hadamard_dataset = hadamard_dataset.dropna()
 
 """Inspect the dataset: view the joint distribution of paired data."""
@@ -137,27 +134,22 @@ def check_hadamard_circuit(backend, amplitude):
     numOfQubits = 1
     realistic_circ = QuantumCircuit(numOfQubits)
     idealistic_circ = QuantumCircuit(numOfQubits)
-
     phase = np.pi
     amp = amplitude
     with pulse.build(backend, name='Hadamard') as h_q0:
         pulse.shift_phase(phase, pulse.drive_channel(0))
         pulse.play(Drag(duration=160, amp=amp, sigma=40, beta=-0.35835396095069005, angle=0.008783280252964184), pulse.drive_channel(0))
         pulse.shift_phase(phase, pulse.drive_channel(0))
-
     data = [amp]
-
     custom_h_gate = Gate('Hadamard', 1, [])
     realistic_circ.append(custom_h_gate, [0])
     realistic_circ.add_calibration(custom_h_gate, [0], h_q0)
     idealistic_circ.h(0)
-
     with pulse.build(backend, name='Measure') as measure:
         pulse.acquire(120, pulse.acquire_channel(0), MemorySlot(0))
     custom_m_gate = Gate('Measure', 1, [])
     realistic_circ.append(custom_m_gate, [0])
     realistic_circ.add_calibration(custom_m_gate, [0], measure)
-
     return realistic_circ, idealistic_circ, data
 
 check_hadamard_circuit(realistic_backend, finer_amp_with_highest_fid)
