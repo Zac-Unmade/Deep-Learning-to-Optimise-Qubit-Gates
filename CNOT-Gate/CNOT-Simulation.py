@@ -1,24 +1,18 @@
+from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts
 
 """
-# CNOT Gate
-
-## Simultion
-
 A break down of the original CNOT gate, such that we can use the same parameters as Qiskit other than the DRAG amplitudes.
 """
-
 original_cnot = QuantumCircuit(2)
 original_cnot.cx(0,1)
 original_cnot_transpile = transpile(original_cnot, realistic_backend)
 original_cnot_sched = schedule(original_cnot_transpile, realistic_backend)
 original_cnot_sched
 
-"""Define the custom CNOT gate."""
 
 def custom_CNOT_circuit(backend):
     numOfQubits = 2
     realistic_circ = QuantumCircuit(numOfQubits)
-
     amp1 = random.uniform(0.000001, 0.999999)
     amp2 = random.uniform(0.000001, 0.999999)
     amp3 = random.uniform(0.000001, 0.999999)
@@ -91,10 +85,6 @@ def CNOT_count(counts_dict):
 realistic_CNOT_array = CNOT_count(CNOT_counts)
 print(realistic_CNOT_array)
 
-def percentage_contribution(arr):
-    total_sum = sum(arr)
-    percentages = [elem / total_sum for elem in arr]
-    return percentages
 
 real_percent_cnot = percentage_contribution(realistic_CNOT_array)
 print(real_percent_cnot)
