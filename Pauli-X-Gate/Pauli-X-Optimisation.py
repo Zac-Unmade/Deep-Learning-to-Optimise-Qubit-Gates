@@ -1,8 +1,24 @@
-"""## Regression with Deep Neural Network
+"""
+Qiskit packages for quantum simulations
+"""
+import qiskit
+from qiskit import pulse, QuantumCircuit, QuantumRegister, execute, Aer, transpile, assemble
+from qiskit.circuit import Gate, Parameter
+from qiskit.pulse import library, DriveChannel, ControlChannel, Schedule, Play, Waveform, Delay, Acquire, MemorySlot, AcquireChannel
+from qiskit.pulse.library import Gaussian, Drag, drag, GaussianSquare
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import QasmSimulator
+from qiskit.providers.fake_provider import FakeValencia
 
-### Preprocess Data
+"""Tensorflow libraries for the deep learning."""
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
+from tensorflow.keras import layers
+from tensorflow import keras
 
-Load and prepare Pauli-X gate data.
+"""
+Preprocess Data
 """
 
 os.chdir("/home/lunet/phzf/Downloads")
@@ -13,7 +29,6 @@ x_dataset = pd.DataFrame({'Amplitude': x_amplitude, 'Fidelity': x_fidelity})
 x_dataset.head()
 
 x_dataset.isna().sum()
-
 x_dataset = x_dataset.dropna()
 
 """Inspect the dataset: view the joint distribution of paired data."""
@@ -130,6 +145,9 @@ print(x_finer_amp_with_highest_fid)
 
 Use the refined ampitude obtained above to check that it is a valid and optimized result.
 """
+
+realistic_backend = FakeValencia()
+idealistic_backend = Aer.get_backend('qasm_simulator')
 
 def check_X_gate_circuit(backend, x_amplitude):
     numOfQubits = 1
