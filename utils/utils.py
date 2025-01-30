@@ -10,6 +10,19 @@ def percentage_difference(num1,num2):
     perc = abs((num1-num2)/num1)*100
     return perc
 
+def percentage_contribution(array):
+    """
+    Calculate the percentage contribution of each element in an array.
+    Parameters:
+    array (list or iterable): A list of numerical values (e.g., integers or floats).
+    Returns:
+    list: A list of percentages where each element represents the percentage contribution 
+          of the corresponding element in the input array.
+    """
+    total_sum = sum(array)
+    percentages = [element / total_sum for element in array]
+    return percentages
+
 def single_gate_counts(counts_dict):
     """
     Retrieve the counts for the '0' and '1' states from a dictionary.
@@ -28,18 +41,20 @@ def single_gate_counts(counts_dict):
         state1 = counts_dict['1']
     return [state0, state1]
 
-def percentage_contribution(array):
-    """
-    Calculate the percentage contribution of each element in an array.
-    Parameters:
-    array (list or iterable): A list of numerical values (e.g., integers or floats).
-    Returns:
-    list: A list of percentages where each element represents the percentage contribution 
-          of the corresponding element in the input array.
-    """
-    total_sum = sum(array)
-    percentages = [element / total_sum for element in array]
-    return percentages
+def multi_gate_count(counts_dict):
+    state00 = 0
+    state01 = 0
+    state10 = 0
+    state11 = 0
+    if '00' in counts_dict:
+        state00 = counts_dict['00']
+    if '01' in counts_dict:
+        state01 = counts_dict['01']
+    if '10' in counts_dict:
+        state10 = counts_dict['10']
+    if '11' in counts_dict:
+        state11 = counts_dict['11']
+    return [state00, state01, state10, state11]
 
 def fidelity(ideal_probs, realistic_probs):
     """
