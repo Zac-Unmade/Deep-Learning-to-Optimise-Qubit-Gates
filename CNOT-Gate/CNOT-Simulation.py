@@ -1,4 +1,4 @@
-from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts
+from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts, multi_gate_count
 
 """
 A break down of the original CNOT gate, such that we can use the same parameters as Qiskit other than the DRAG amplitudes.
@@ -65,24 +65,9 @@ plot_histogram(CNOT_counts)
 
 CNOT_counts
 
-def CNOT_count(counts_dict):
-    state00 = 0
-    state01 = 0
-    state10 = 0
-    state11 = 0
-    if '00' in counts_dict:
-        state00 = counts_dict['00']
-    if '01' in counts_dict:
-        state01 = counts_dict['01']
-    if '10' in counts_dict:
-        state10 = counts_dict['10']
-    if '11' in counts_dict:
-        state11 = counts_dict['11']
-    return [state00, state01, state10, state11]
-
 """Put counts of states in an array, then convert it to a percentage."""
 
-realistic_CNOT_array = CNOT_count(CNOT_counts)
+realistic_CNOT_array = multi_gate_count(CNOT_counts)
 print(realistic_CNOT_array)
 
 
@@ -111,7 +96,7 @@ def custom_cnot_process():
     counts = job.result().get_counts()
     end_time = time.time()
     cnot_time = end_time - start_time
-    realistic_cnot_array = CNOT_count(counts)
+    realistic_cnot_array = multi_gate_count(counts)
     real_percent_cnot = percentage_contribution(realistic_cnot_array)
     ideal_cnot_counts = [1024, 0, 0, 0]
     ideal_percent_cnot = percentage_contribution(ideal_cnot_counts)
