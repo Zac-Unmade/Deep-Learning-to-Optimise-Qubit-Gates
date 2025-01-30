@@ -1,8 +1,8 @@
+from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts
 
-"""Libraries
+"""
 Qiskit packages for quantum simulations
 """
-
 import qiskit
 from qiskit import *
 from qiskit import pulse, QuantumCircuit, QuantumRegister, execute, Aer, transpile, assemble
@@ -19,7 +19,6 @@ print("Qiskit version:", qiskit.__version__)
 print("Qiskit Aer version:", qiskit.providers.aer.__version__)
 
 """Tensorflow libraries for the deep learning."""
-
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
@@ -37,15 +36,14 @@ import csv
 import os
 
 
-"""# Backend
-These are the backends required for running the simulations on.
+"""
+The backends required for running the simulations on.
 """
 realistic_backend = FakeValencia()
 idealistic_backend = Aer.get_backend('qasm_simulator')
 
-"""# Hadamard Gate
-## Simulation
-A break down of the original hadamard gate, such that we can use the same parameters as Qiskit other than the amplitude.
+"""
+Break down generic hadamard gate, to get generic Qiskit parameters
 """
 original_hadamard = QuantumCircuit(1)
 original_hadamard.h(0)
@@ -53,7 +51,6 @@ original_hadamard_transpile = transpile(original_hadamard, realistic_backend)
 original_hadamard_sched = schedule(original_hadamard_transpile, realistic_backend)
 original_hadamard_sched
 
-"""Define the custom Hadamard gate."""
 
 def custom_hadamard_circuit(backend):
     """
