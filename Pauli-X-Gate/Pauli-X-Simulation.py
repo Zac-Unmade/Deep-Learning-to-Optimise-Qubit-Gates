@@ -1,6 +1,37 @@
 from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts
 
 """
+Qiskit packages for quantum simulations
+"""
+import qiskit
+from qiskit import pulse, QuantumCircuit, QuantumRegister, execute, Aer, transpile, assemble
+from qiskit.circuit import Gate, Parameter
+from qiskit.pulse import library, DriveChannel, ControlChannel, Schedule, Play, Waveform, Delay, Acquire, MemorySlot, AcquireChannel
+from qiskit.pulse.library import Gaussian, Drag, drag, GaussianSquare
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import QasmSimulator
+from qiskit.providers.fake_provider import FakeValencia
+
+print("Qiskit version:", qiskit.__version__)
+print("Qiskit Aer version:", qiskit.providers.aer.__version__)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import random
+import time
+import math
+import csv
+import os
+
+"""
+The backends required for running the simulations on.
+"""
+realistic_backend = FakeValencia()
+idealistic_backend = Aer.get_backend('qasm_simulator')
+
+"""
 A break down of the original Pauli-X gate, such that we can use the same parameters as Qiskit other than the amplitude.
 """
 
