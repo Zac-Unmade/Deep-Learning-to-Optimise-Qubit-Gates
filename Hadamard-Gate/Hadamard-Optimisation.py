@@ -1,8 +1,11 @@
-"""## Regression with Deep Neural Network
+"""Tensorflow libraries for the deep learning."""
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
+from tensorflow.keras import layers
+from tensorflow import keras
 
-### Preprocess Data
-"""
-
+"""Preprocess Data"""
 folder = './data' 
 filename = 'hadamard_data.csv'
 file_path = os.path.join(folder, filename)
@@ -129,6 +132,9 @@ print(finer_amp_with_highest_fid)
 
 Use the refined ampitude obtained above to check that it is a valid and optimized result.
 """
+
+realistic_backend = FakeValencia()
+idealistic_backend = Aer.get_backend('qasm_simulator')
 
 def check_hadamard_circuit(backend, amplitude):
     numOfQubits = 1
