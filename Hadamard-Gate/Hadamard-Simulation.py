@@ -4,16 +4,13 @@ from utils import fidelity, percentage_difference, percentage_contribution, sing
 Qiskit packages for quantum simulations
 """
 import qiskit
-from qiskit import *
 from qiskit import pulse, QuantumCircuit, QuantumRegister, execute, Aer, transpile, assemble
 from qiskit.circuit import Gate, Parameter
 from qiskit.pulse import library, DriveChannel, ControlChannel, Schedule, Play, Waveform, Delay, Acquire, MemorySlot, AcquireChannel
 from qiskit.pulse.library import Gaussian, Drag, drag, GaussianSquare
 from qiskit.visualization import plot_histogram
 from qiskit.providers.aer import QasmSimulator
-from qiskit.providers.aer.noise import NoiseModel, depolarizing_error
-from qiskit.providers.aer.noise.errors import thermal_relaxation_error, coherent_unitary_error
-from qiskit.providers.fake_provider import FakeArmonk, FakeValencia, FakeHanoi
+from qiskit.providers.fake_provider import FakeValencia
 
 print("Qiskit version:", qiskit.__version__)
 print("Qiskit Aer version:", qiskit.providers.aer.__version__)
