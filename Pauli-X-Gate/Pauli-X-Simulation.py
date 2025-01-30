@@ -1,8 +1,6 @@
+from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts
+
 """
-# Pauli-X Gate
-
-## Simulation
-
 A break down of the original Pauli-X gate, such that we can use the same parameters as Qiskit other than the amplitude.
 """
 
@@ -18,36 +16,30 @@ def custom_X_gate_circuit(backend):
     numOfQubits = 1
     realistic_circ = QuantumCircuit(numOfQubits)
     idealistic_circ = QuantumCircuit(numOfQubits)
-
     amp = random.uniform(0.000001, 0.999999)
     with pulse.build(backend, name='X Gate') as x_q0:
         pulse.play(Drag(duration=160, amp=amp, sigma=40, beta=-0.25388969010654494, angle=0.0), pulse.drive_channel(0))
     data = [amp]
-
     custom_x_gate = Gate('X Gate', 1, [])
     realistic_circ.append(custom_x_gate, [0])
     realistic_circ.add_calibration(custom_x_gate, [0], x_q0)
     idealistic_circ.x(0)
-
     with pulse.build(backend, name='Measure') as measure:
         pulse.acquire(120, pulse.acquire_channel(0), MemorySlot(0))
     custom_m_gate = Gate('Measure', 1, [])
     realistic_circ.append(custom_m_gate, [0])
     realistic_circ.add_calibration(custom_m_gate, [0], measure)
-
     return realistic_circ, idealistic_circ, data
 
 custom_X_gate_circuit(realistic_backend)
 
 """Transpile and schedule the custom Pauli-X gate."""
-
 x_circuit = custom_X_gate_circuit(realistic_backend)
 random_x_circ_transpile = transpile(x_circuit[0], realistic_backend)
 random_x_circ_sched = schedule(random_x_circ_transpile, realistic_backend)
 random_x_circ_sched.draw()
 
 """Run the custom Pauli-X gate and time it for analysing the how long it takes to run of different devices. Then show the count of states in a histogram."""
-
 x_job = realistic_backend.run(random_x_circ_sched, shots=1024)
 x_start_time = time.time()
 x_counts = x_job.result().get_counts()
