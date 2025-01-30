@@ -18,13 +18,6 @@ from qiskit.providers.fake_provider import FakeArmonk, FakeValencia, FakeHanoi
 print("Qiskit version:", qiskit.__version__)
 print("Qiskit Aer version:", qiskit.providers.aer.__version__)
 
-"""Tensorflow libraries for the deep learning."""
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error
-from tensorflow.keras import layers
-from tensorflow import keras
-
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
