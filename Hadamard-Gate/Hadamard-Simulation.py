@@ -226,16 +226,15 @@ def custom_hadamard_process():
 
 custom_hadamard_process()
 
-"""## Gather Data"""
-
+"""Gather Data"""
 num_runs = 1000000
-folder = '/home/lunet/phzf/Documents'
+folder = './data'
 filename = 'hadamard_data.csv'
 file_path = os.path.join(folder, filename)
+os.makedirs(folder, exist_ok=True)
 with open(file_path, 'a', newline='') as f:
     write = csv.writer(f)
     for i in range(num_runs):
         array = custom_hadamard_process()
         flattened_array = [str(i) for sublist in array for i in sublist]
         write.writerow(flattened_array)
-
