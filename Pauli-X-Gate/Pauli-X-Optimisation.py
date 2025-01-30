@@ -17,12 +17,11 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras import layers
 from tensorflow import keras
 
-"""
-Preprocess Data
-"""
-
-os.chdir("/home/lunet/phzf/Downloads")
-x_df = pd.read_csv('x_gate_data.csv')
+"""Preprocess Data"""
+folder = './data' 
+filename = 'x_gate_data.csv'
+file_path = os.path.join(folder, filename)
+x_df = pd.read_csv(file_path)
 x_amplitude = x_df.iloc[:15000, 0]
 x_fidelity = x_df.iloc[:15000, 1]
 x_dataset = pd.DataFrame({'Amplitude': x_amplitude, 'Fidelity': x_fidelity})
