@@ -118,12 +118,12 @@ def custom_x_gate_process():
 
 custom_x_gate_process()
 
-"""## Gather Data"""
-
+"""Gather Data"""
 num_runs = 1000000
-folder = '/home/lunet/phzf/Documents'
+folder = './data'
 filename = 'x_gate_data.csv'
 file_path = os.path.join(folder, filename)
+os.makedirs(folder, exist_ok=True)
 with open(file_path, 'a', newline='') as f:
     write = csv.writer(f)
     for i in range(num_runs):
