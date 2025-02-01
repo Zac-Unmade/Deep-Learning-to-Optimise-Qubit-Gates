@@ -10,3 +10,15 @@ Key features include:
 - A focus on single-qubit gates (Hadamard, Pauli-X) and two-qubit gates (CNOT).
 
 This work is part of the ongoing effort to improve the scalability and precision of quantum computing systems. 
+
+## Paper
+
+This code is associated with the paper titled *[Optimisation of Pulse Waveforms for Qubit Gates using Deep Learning
+]* (available on [arXiv:2408.02376](https://arxiv.org/abs/2408.02376)).
+
+## Citation
+
+If you use this code in your work, please cite our paper:
+
+**[Fillingham, Zachary & Nevisi, Hossein & Dora, Shirin]**, *[Optimisation of Pulse Waveforms for Qubit Gates using Deep Learning
+]*, arXiv:2408.02376, 2024. [Available here](https://arxiv.org/abs/2408.02376).
