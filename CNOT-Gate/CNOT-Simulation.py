@@ -1,6 +1,31 @@
 from utils import fidelity, percentage_difference, percentage_contribution, single_gate_counts, multi_gate_count
 
 """
+Qiskit packages for quantum simulations
+"""
+import qiskit
+from qiskit import pulse, QuantumCircuit, QuantumRegister, execute, Aer, transpile, assemble
+from qiskit.circuit import Gate, Parameter
+from qiskit.pulse import library, DriveChannel, ControlChannel, Schedule, Play, Waveform, Delay, Acquire, MemorySlot, AcquireChannel
+from qiskit.pulse.library import Gaussian, Drag, drag, GaussianSquare
+from qiskit.visualization import plot_histogram
+from qiskit.providers.aer import QasmSimulator
+from qiskit.providers.fake_provider import FakeValencia
+
+print("Qiskit version:", qiskit.__version__)
+print("Qiskit Aer version:", qiskit.providers.aer.__version__)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import random
+import time
+import math
+import csv
+import os
+
+"""
 A break down of the original CNOT gate, such that we can use the same parameters as Qiskit other than the DRAG amplitudes.
 """
 original_cnot = QuantumCircuit(2)
@@ -106,12 +131,12 @@ def custom_cnot_process():
 
 custom_cnot_process()
 
-"""## Gather Data"""
-
+"""Gather Data"""
 num_runs = 1000000
-folder = '/home/lunet/phzf/Documents'
+folder = './data'
 filename = 'cnot_data.csv'
 file_path = os.path.join(folder, filename)
+os.makedirs(folder, exist_ok=True)
 with open(file_path, 'a', newline='') as f:
     write = csv.writer(f)
     for i in range(num_runs):
