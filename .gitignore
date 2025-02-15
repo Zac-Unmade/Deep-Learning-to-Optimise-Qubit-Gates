@@ -1,0 +1,20 @@
+# Ignore Python cache and compiled files  
+__pycache__/  
+*.pyc  
+*.pyo  
+
+# Ignore logs and debugging output  
+*.log  
+debug.log  
+
+# Ignore Jupyter Notebook checkpoints  
+.ipynb_checkpoints/  
+
+# Ignore deep learning model checkpoints  
+*.ckpt  
+*.h5  
+*.pth  
+
+# Ignore any temporary or swap files  
+*.swp  
+*.swo  
